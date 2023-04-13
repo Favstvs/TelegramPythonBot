@@ -14,9 +14,10 @@ def appare_waifu(update, context):
 		waifu_pic = json.load(waifu_file)
 		testo = update.message.text.lower()
 		if "waifu" in testo:
-			image = waifu_pic['pic']#choice(glob("waifu/*.jpg"))
-			update.message.reply_photo(open(image, 'rb'))
-			update.message.reply_text("uwu, è apparsa una waifu! Aggiungila al tuo harem con /protecc nome ")
+			images = waifu_pic['waifu']['pic']
+			random_pic = choice(images)
+			update.message.reply_photo(open(random_pic, 'rb'), caption="OwO<b>Appare una waifu!</b>\nAggiungila al tuo harem con /protecc <i>nome waifu</i>\n", parse_mode='HTML')
+				
 
 
 updater = Updater(TOKEN)
