@@ -16,6 +16,6 @@ CREATE TABLE `scambi` (
   CONSTRAINT `scambio_ibfk_1` FOREIGN KEY (`ID_User_1`) REFERENCES `users` (`ID_User`),
   CONSTRAINT `scambio_ibfk_2` FOREIGN KEY (`ID_User_2`) REFERENCES `users` (`ID_User`),
   CONSTRAINT `scambio_ibfk_3` FOREIGN KEY (`ID_Supergruppo`) REFERENCES `supergruppo` (`ID_Supergruppo`),
-  CONSTRAINT `scambio_ibfk_4` FOREIGN KEY (`Trade_1`) REFERENCES `waifu` (`ID_Waifu`),
-  CONSTRAINT `scambio_ibfk_5` FOREIGN KEY (`Trade_2`) REFERENCES `waifu` (`ID_Waifu`)
+  CONSTRAINT `scambio_ibfk_4` FOREIGN KEY (`Scambio_1`) REFERENCES `waifu` (`ID_Waifu`),
+  CONSTRAINT `scambio_ibfk_5` FOREIGN KEY (`Scambio_2`) REFERENCES `waifu` (`ID_Waifu`)
 ) ENGINE=InnoDB;
