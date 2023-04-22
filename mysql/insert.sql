@@ -1,0 +1,24 @@
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('1', 'Osaka', 'Azumanga Daioh', '/home/kali/Desktop/osaka.jpg');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('2', 'Power', 'Chainsawman', '/home/kali/Desktop/power.jpg');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('3', 'Kobeni', 'Chainsawman', '/home/kali/Desktop/kobeni.jpg');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('4', 'Raiden', 'Genshin Impact', '/home/kali/Desktop/raiden.jpg');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('5', 'Cippe', 'il Cippe', '/home/kali/Desktop/cippe.jpg');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('6', 'Allegri', 'Juventus', '/home/kali/Desktop/allegri.jpg');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('7', 'Tomo', 'Azumanga Daioh', '/home/kali/Desktop/tomo.png');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('8', 'Miku', 'Vocaloid', '/home/kali/Desktop/miku.jpg');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('9', 'Yoru', 'Chainsawman', '/home/kali/Desktop/yoru.jpg');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('10', 'Gawr Gura', 'Hololive', '/home/kali/Desktop/gura.jpg');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('11', 'Yua', 'Miru Tights', '/home/kali/Desktop/yua.jpg');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('12', 'Ren', 'Miru Tights', '/home/kali/Desktop/ren.jpg');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('13', 'Hitori Goto', 'Bocchi The Rock', '/home/kali/Desktop/bocchi.jpg');
+
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('14', 'Nijika', 'Bocchi The Rock', '/home/kali/Desktop/nijika.jpg');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('15', 'Ai Hoshino', 'Oshi no Ko', '/home/kali/Desktop/ai.jpg');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('16', '', '', '/home/kali/Desktop/');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('17', '', '', '/home/kali/Desktop/');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('18', '', '', '/home/kali/Desktop/');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('19', '', '', '/home/kali/Desktop/');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('20', '', '', '/home/kali/Desktop/');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('21', '', '', '/home/kali/Desktop/');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('22', '', '', '/home/kali/Desktop/');
+INSERT INTO waifu (ID_Waifu, Nome_Waifu, Nome_Anime, PATH_IMG) VALUES ('23', '', '', '/home/kali/Desktop/');
