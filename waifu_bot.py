@@ -6,6 +6,9 @@ NOTE E CORREZZIONI:
 -Verificare se /gift funziona
 -Sistemare creazione dei pulsanti callback in haremfatewaifugram()
 
+v. 20 Python-Telegram_Bot:
+-TypeError: Updater.__init__() missing 1 required positional argument: 'update_queue'
+
 DEPRECATION:
 -TelegramDeprecationWarning: The @run_async decorator is deprecated. Use the `run_async` parameter of your Handler or `Dispatcher.run_async` instead.
 -TelegramDeprecationWarning: Filters.group is deprecated. Use Filters.chat_type.groups instead.
