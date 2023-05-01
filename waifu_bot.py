@@ -236,7 +236,7 @@ def haremfatewaifugram(update: Update, context: CallbackContext):
         Harem = ""
         for row in data:
             i += 1
-            Harem = str(Harem + str(row[0]) + ". " + row[1] + " NP" + str(row[2]) + " ID: " + str(row[3]) + "\n")
+            Harem = str(Harem + str(row[0]) + ". " + row[1] + " NP: " + str(row[2]) + " ID: " + str(row[3]) + "\n")
             if i == 20:
                 break
 
@@ -578,8 +578,8 @@ def tradewaifu(update: Update, context: CallbackContext):
 
                                 # Creo i pulsanti
                                 keyboard = [[InlineKeyboardButton('No :(', callback_data='No@Waifu_Bot'),
-                                             InlineKeyboardButton('Yes!', callback_data='Yes@Waifu_Bot')],
-                                            [InlineKeyboardButton('Quit', callback_data='Quit@Waifu_Bot')]]
+                                             InlineKeyboardButton('Yes!', callback_data='Sì@Waifu_Bot')],
+                                            [InlineKeyboardButton('Quit', callback_data='Esci@Waifu_Bot')]]
                                 reply_markup = InlineKeyboardMarkup(keyboard)
 
                                 # Recupero gli Username per la creazione del messaggio
@@ -654,7 +654,7 @@ def checktradewaifu(update: Update, context: CallbackContext):
             # Avverto che non può rispondere al proprio scambio
     else:
         # Raccolgo la richiesta del callback
-        if CallBackRequest == "Yes@Waifu_Bot":
+        if CallBackRequest == "Sì@Waifu_Bot":
             # Effettuo lo scambio
             # 1 - Rimuovo i rispettivi servant
 
@@ -1304,11 +1304,11 @@ def main():
     dp.add_handler(CommandHandler("gift", gift, Filters.group & Filters.update.message))
     dp.add_handler(CommandHandler("favoritewaifu", favoritewaifu, Filters.group & Filters.update.message))
     dp.add_handler(CallbackQueryHandler(checktradewaifu, pattern="No@Waifu_Bot"))
-    dp.add_handler(CallbackQueryHandler(checktradewaifu, pattern="Yes@Waifu_Bot"))
-    dp.add_handler(CallbackQueryHandler(checktradewaifu, pattern="Quit@Waifu_Bot"))
+    dp.add_handler(CallbackQueryHandler(checktradewaifu, pattern="Sì@Waifu_Bot"))
+    dp.add_handler(CallbackQueryHandler(checktradewaifu, pattern="Esci@Waifu_Bot"))
     dp.add_handler(CallbackQueryHandler(checkgift, pattern="No@Waifu_Bot"))
-    dp.add_handler(CallbackQueryHandler(checkgift, pattern="Yes@Waifu_Bot"))
-    dp.add_handler(CallbackQueryHandler(checkgift, pattern="Quit@Waifu_Bot"))
+    dp.add_handler(CallbackQueryHandler(checkgift, pattern="Sì@Waifu_Bot"))
+    dp.add_handler(CallbackQueryHandler(checkgift, pattern="Esci@Waifu_Bot"))
 
     # Gestione lista servants
     dp.add_handler(CommandHandler("listawaifu", haremfatewaifugram, Filters.group & Filters.update.message))
