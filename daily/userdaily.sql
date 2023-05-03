@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `daily`;
 
 CREATE TABLE `daily` (
   `ID_User` bigint NOT NULL,
