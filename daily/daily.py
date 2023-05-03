@@ -16,7 +16,7 @@ def daily(update: Update, context: CallbackContext):
     
     def funcdaily():
 	 try:
-    	 	mycursor.execute("""UPDATE users SET Coins=Coins+100 WHERE ID_User=%s;""", (ID_User))
+    	 	mycursor.execute("""UPDATE daily SET Coins=Coins+100 WHERE ID_User=%s;""", (ID_User))
     	 
     		update.message.reply_text("💰 Hai riscattato i coins giornalieri ")
     	 
