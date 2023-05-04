@@ -27,7 +27,7 @@ context.job_queue.run_daily(func, context=update.message.chat_id, days=(0, 1, 2,
 def daily(update: Update, context: CallbackContext):
 
     ID_Supergruppo = str(update.message.chat.id)
-    ID_User = str(update.message.from_user.id)
+    ID_User = int(update.message.from_user.id)
     Username = str(update.message.from_user.username)
 
     UpdateGroup(ID_Supergruppo, context)
