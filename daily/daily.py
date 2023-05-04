@@ -70,10 +70,4 @@ def daily(update: Update, context: CallbackContext):
         update.message.reply_text("Hai già riscatto i tuoi coins. Devi aspettare 24 ore ")
 
 
-    	 
-    
-    
-  
-
-
-#dp.add_handler(CommandHandler("daily", daily, Filters.group & Filters.update.message))
+#dp.add_handler(CommandHandler("daily", daily, Filters.chat_type.supergroup & Filters.update.message))
