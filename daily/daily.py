@@ -34,7 +34,7 @@ def daily(update: Update, context: CallbackContext):
     CheckUser(ID_User, Username)
     
     #prendo la data del messaggio
-    Time_Mess = update.message(date)
+    Time_Mess = update.message.date
 
     #estraggo l'ultima data registrata
     mycursor.execute("""SELECT Time_Mess FROM daily WHERE ID_User=%s""", (ID_User))
