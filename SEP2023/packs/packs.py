@@ -20,6 +20,10 @@ step 3 - farli comparire in chat per essere catturati con /protecc(?)
         - mettere la selezione ed estraione in ciclo for per 3 volte (forse opzione migliore)
         - QUERY SQL per estrarre 3 elementi dalla tabella
 
+DATA: 26 Settembre
+applicare stesso metodo del ./daily per far apparire il pack:
+- il comando si può eseguire dopo un determinato lasso di tempo
+
 '''
 def UpdatePacks(ID_Supergruppo, context: CallbackContext):
     # Check veloce del gruppo
