@@ -1,12 +1,11 @@
-DROP TABLE IF EXISTS `hrelazioni`;
+DROP TABLE IF EXISTS `Hrelation`;
 
-CREATE TABLE `hrelazioni` (
+CREATE TABLE `Hrelation` (
   `ID_User` bigint NOT NULL,
   `ID_Supergruppo` bigint NOT NULL,
   `ID_Husbando` int NOT NULL,
   `NP` int NOT NULL,
   `Place` int NOT NULL,
-  PRIMARY KEY (`ID_User`,`ID_Supergruppo`,`ID_Waifu`),
   PRIMARY KEY (`ID_User`, `ID_Supergruppo`, `ID_Husbando`),
   KEY `ID_Supergruppo` (`ID_Supergruppo`),
   KEY `ID_Husbando` (`ID_Husbando`),
