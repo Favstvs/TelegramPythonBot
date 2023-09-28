@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `hmanagement`;
+DROP TABLE IF EXISTS `Hmanagement`;
 
-CREATE TABLE `hmanagement` (
+CREATE TABLE `Hmanagement` (
   `ID_Supergruppo` bigint NOT NULL,
   `ID_Husbando` int DEFAULT NULL,
   `Time_Mess` int unsigned NOT NULL,
