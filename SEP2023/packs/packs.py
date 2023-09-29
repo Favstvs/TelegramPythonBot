@@ -26,10 +26,69 @@ applicare stesso metodo del ./daily per far apparire il pack:
 
 '''
 def UpdatePacks(ID_Supergruppo, context: CallbackContext):
+ ##########################################################
+ #[ATTENZIONE] Però con il metoodo di /daily, l'esecuzione del comando si basa sull'utilizzo dell'utente e non di un parametro globzaale
+ # dunque il comando potrebbe essere ripetuto una volta ogni tot ore per ogni utente nel gruppo
+ ##########################################################
+
+ 
+  ID_Supergruppo = str(update.message.chat.id)
+    ID_User = str(update.message.from_user.id)
+    Username = str(update.message.from_user.username)
+    
+    UpdateGroup(ID_Supergruppo, context)
+    CheckUser(ID_User, Username)
+    
+    Time_Mess = update.message.date
+    Time_Mess = Time_Mess.replace(tzinfo=None)
+    
+    mycursor.execute("""SELECT Time_Mess FROM users WHERE ID_User=%s""", (ID_User,))
+    data = mycursor.fetchone()
+    
+    if data[0] == None:
+        mycursor.execute("""UPDATE users SET Time_Mess=now() WHERE ID_User=%s""",(ID_User,))
+        mycursor.execute("""SELECT Time_Mess FROM users WHERE ID_User=%s""", (ID_User,))
+        data1 = mycursor.fetchone()
+        date_1 = data1[0]
+    else:
+        date_1 = data[0]
+        date_2 = Time_Mess
+        date_format_str = "%Y-%m-%d %H:%M:%S"
+        date_1_start = datetime.strptime(str(date_1), date_format_str)
+        date_2_end = datetime.strptime(str(date_2), date_format_str)
+        
+        diff = date_2_end - date_1_start
+        diff_in_hours = diff.total_seconds()/3600
+        
+        if diff_in_hours > 8: #Ogni 8 ore, altrimenti RIFIUTA
+            #mycursor.execute("""UPDATE users SET Coins=Coins+100 WHERE ID_User=%s;""", (ID_User,))
+            #mycursor.execute("""SELECT Coins FROM users WHERE ID_User=%s""", (ID_User,))
+            #data = mycursor.fetchone()
+            context.bot.send_photo(chat_id=ID_Supergruppo, photo=open('/home/enrico/Immagini/w&h.jpeg', 'rb'), caption="Hey Hey <b>Appare finalmente un pack</b> 📦\n Scegli se vuoi <i>waifu</i> oppure <i>husbando<i>\n", parse_mode='HTML')
+            # Creo i pulsanti per la selezione
+            keyboard = [[InlineKeyboardButton('WAIFU', callback_data='Waifu@Waifu_Bot'),
+                         InlineKeyboardButton('HUSBANDO', callback_data='Husbando@Waifu_Bot')],
+                         [InlineKeyboardButton('Quit', callback_data='Esci@Waifu_Bot')]]
+            reply_markup = InlineKeyboardMarkup(keyboard)
+         '''
+            if data:
+                Total_Coins = str(data[0])
+                update.message.reply_text("💰 Hai riscattato i coins giornalieri\n\n Ora i tuoi coins totali sono " + Total_Coins + " 🪙 " )
+                print("orario del messaggio : " + str(Time_Mess))
+                mycursor.execute("""SELECT Time_Mess FROM users WHERE ID_User=%s""", (ID_User,))
+                data2 = mycursor.fetchone()
+                print("orario dell'ultimo utilizzo del comando : " + str(data2[0]))
+                mycursor.execute("""UPDATE users SET Time_Mess=%s WHERE ID_User=%s""", (Time_Mess, ID_User,))
+           '''
+        else:
+            update.message.reply_text("❌Hai già richesto un Pack. Devi aspettare 8 ore ")
+     ###################################################################################################################
     # Check veloce del gruppo
 
     # Aggiorno il numero di messaggi prima del prossimo spawn
     # Condizione generale [if (new_message_number - last_message_number = 200) send_packs()]
+  
+    ''''
     mycursor.execute("""SELECT Time_Mess, Started
                         FROM management
                         WHERE ID_Supergruppo = %s""",
@@ -48,7 +107,7 @@ def UpdatePacks(ID_Supergruppo, context: CallbackContext):
                                 WHERE ID_Supergruppo = %s""",
                              (ID_Supergruppo,))
             context.bot.send_message(chat_id=ID_Supergruppo, text="RIP, le waifu sono scappate via...")
-            
+          '''  
 
             # Avverto gli utente del gruppo della comparsa del Packs
             context.bot.send_photo(chat_id=ID_Supergruppo, photo=open('/home/enrico/Immagini/w&h.jpeg', 'rb'), caption="Hey Hey <b>Appare finalmente un pack</b> 📦\n Scegli se vuoi <i>waifu</i> oppure <i>husbando<i>\n", parse_mode='HTML')
