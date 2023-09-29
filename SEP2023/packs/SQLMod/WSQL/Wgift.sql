@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `regali`;
+DROP TABLE IF EXISTS `Wgift`;
 
-CREATE TABLE `regali` (
+CREATE TABLE `Wgift` (
   `ID_Supergruppo` bigint NOT NULL,
   `Mess_ID_Gift` bigint NOT NULL,
   `ID_User_1` bigint NOT NULL,
