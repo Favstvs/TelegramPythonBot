@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `relazioni`;
+DROP TABLE IF EXISTS `Wrelation`;
 
-CREATE TABLE `relazioni` (
+CREATE TABLE `Wrelation` (
   `ID_User` bigint NOT NULL,
   `ID_Supergruppo` bigint NOT NULL,
   `ID_Waifu` int NOT NULL,
