@@ -27,12 +27,12 @@ applicare stesso metodo del ./daily per far apparire il pack:
 '''
 def UpdatePacks(ID_Supergruppo, context: CallbackContext):
  ##########################################################
- #[ATTENZIONE] Però con il metoodo di /daily, l'esecuzione del comando si basa sull'utilizzo dell'utente e non di un parametro globzaale
+ #[ATTENZIONE] Però con il metoodo di /daily, l'esecuzione del comando si basa sull'utilizzo dell'utente e non di un parametro globale
  # dunque il comando potrebbe essere ripetuto una volta ogni tot ore per ogni utente nel gruppo
  ##########################################################
 
  
-  ID_Supergruppo = str(update.message.chat.id)
+    ID_Supergruppo = str(update.message.chat.id)
     ID_User = str(update.message.from_user.id)
     Username = str(update.message.from_user.username)
     
