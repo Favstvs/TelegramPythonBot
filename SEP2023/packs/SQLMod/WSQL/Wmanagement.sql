@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `management`;
+DROP TABLE IF EXISTS `Wmanagement`;
 
-CREATE TABLE `management` (
+CREATE TABLE `Wmanagement` (
   `ID_Supergruppo` bigint NOT NULL,
   `ID_Waifu` int DEFAULT NULL,
   `Time_mess` int unsigned NOT NULL,
