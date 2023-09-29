@@ -60,54 +60,54 @@ def UpdatePacks(ID_Supergruppo, context: CallbackContext):
 
             # Raccolgo la richiesta del callback
             if CallBackRequest == "Waifu@Waifu_Bot":
-                #for x in range(3):
-                mycursor.execute("""SELECT ID_Waifu
+                for x in range(3):
+                 mycursor.execute("""SELECT ID_Waifu
                                     FROM waifu
                                     ORDER BY ID_Waifu desc""")
-                data = mycursor.fetchone()
-                MAX_WAIFU_ID = int(data[0])
+                 data = mycursor.fetchone()
+                 MAX_WAIFU_ID = int(data[0])
 
-                ID_WAIFU = random.randrange(1, MAX_WAIFU_ID + 1)
+                 ID_WAIFU = random.randrange(1, MAX_WAIFU_ID + 1)
 
-                mycursor.execute("""SELECT ID_Waifu, PATH_IMG
+                 mycursor.execute("""SELECT ID_Waifu, PATH_IMG
                                     FROM waifu
                                     WHERE ID_Waifu = %s
                                  """, (ID_WAIFU,))
-                data = mycursor.fetchone()
-                ID_Waifu = data[0]
-                PATH_IMG = data[1]
+                 data = mycursor.fetchone()
+                 ID_Waifu = data[0]
+                 PATH_IMG = data[1]
 
-                mycursor.execute("""UPDATE management
+                 mycursor.execute("""UPDATE Wmanagement
                                     SET Time_Mess = 25,
                                     Started = 1,
                                     ID_Waifu = %s,
                                     WHERE ID_Supergruppo = %s""",
                                     (ID_Waifu, ID_Supergruppo,))
-                context.bot.send_photo(chat_id=ID_Supergruppo, photo=open(PATH_IMG, 'rb'), caption="OwO <b>Appare una waifu!</b>\nAggiungila al tuo harem con /protecc <i>nome waifu</i>\n", parse_mode='HTML')
+                 context.bot.send_photo(chat_id=ID_Supergruppo, photo=open(PATH_IMG, 'rb'), caption="OwO <b>Appare una waifu!</b>\nAggiungila al tuo harem con /protecc <i>nome waifu</i>\n", parse_mode='HTML')
             elif CallBackRequest == "Husbando@Waifu_Bot":
-                #for x in range(3):
-                mycursor.execute("""SELECT ID_Husbando
+                for x in range(3):
+                 mycursor.execute("""SELECT ID_Husbando
                                     FROM husbandi
                                     ORDER BY ID_Husbando desc""")
-                data = mycursor.fetchone()
-                MAX_HUSBANDO_ID = int(data[0])
+                 data = mycursor.fetchone()
+                 MAX_HUSBANDO_ID = int(data[0])
                 
-                ID_HUSBANDO = random.randrange(1, MAX_HUSBANDO_ID + 1)
+                 ID_HUSBANDO = random.randrange(1, MAX_HUSBANDO_ID + 1)
 
-                mycursor.execute("""SELECT ID_Husbando, PATH_IMG
+                 mycursor.execute("""SELECT ID_Husbando, PATH_IMG
                                     FROM husbandi
                                     WHERE ID_Husbando = %s""", (ID_HUSBANDO,))
-                data = mycursor.fetchone()
-                ID_Husbando = data[0]
-                PATH_IMG = data[1]
+                 data = mycursor.fetchone()
+                 ID_Husbando = data[0]
+                 PATH_IMG = data[1]
 
-                mycursor.execute("""UPDATE management
+                 mycursor.execute("""UPDATE Hmanagement
                                     SET Time_Mess = 25,
                                     Started = 1,
                                     ID_Husbando = %s
                                     WHERE ID_Supergruppo = %s""",
                                     (ID_Husbando, ID_Supergruppo,))
-                context.bot.send_photo(chat_id=ID_Supergruppo, photo=open(PATH_IMG, 'rb', caption="Owo <b>Appare un husbando!</b>\nAggiungilo al tuo harem con /protecc <i>nome husbando</i>\n", parse_mode='HTML'))
+                 context.bot.send_photo(chat_id=ID_Supergruppo, photo=open(PATH_IMG, 'rb', caption="Owo <b>Appare un husbando!</b>\nAggiungilo al tuo harem con /protecc <i>nome husbando</i>\n", parse_mode='HTML'))
             elif CallBackRequest == "Esci@Waifu_Bot":
                 update.callback_query.answer(text="Nada...")
 
