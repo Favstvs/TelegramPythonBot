@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `harem`;
+DROP TABLE IF EXISTS `Wharem`;
 
-CREATE TABLE `harem` (
+CREATE TABLE `Wharem` (
   `ID_Supergruppo` bigint NOT NULL,
   `ID_User` bigint NOT NULL,
   `Mess_ID_List` bigint NOT NULL,
