@@ -1379,15 +1379,15 @@ def UpdatePacks(ID_Supergruppo, context: CallbackContext):
     UpdateGroup(ID_Supergruppo, context)
     CheckUser(ID_User, Username)
     
-    Time_Mess = update.message.date
-    Time_Mess = Time_Mess.replace(tzinfo=None)
+    Time_Mess_Packs = update.message.date
+    Time_Mess_Packs = Time_Mess.replace(tzinfo=None)
     #[PROBLEMA: Impostare timer per intero gruppo, così è riferito a singolo utente]
-    mycursor.execute("""SELECT Time_Mess FROM users WHERE ID_User=%s""", (ID_User,))
+    mycursor.execute("""SELECT Time_Mess_Packs FROM packsmanagement WHERE ID_Supergruppo=%s""", (ID_Supergruppo,))
     data = mycursor.fetchone()
     
     if data[0] == None:
-        mycursor.execute("""UPDATE users SET Time_Mess=now() WHERE ID_User=%s""",(ID_User,))
-        mycursor.execute("""SELECT Time_Mess FROM users WHERE ID_User=%s""", (ID_User,))
+        mycursor.execute("""UPDATE packsmanagement SET Time_Mess_Packs=now() WHERE ID_Supergruppo=%s""",(ID_Supergruppo,))
+        mycursor.execute("""SELECT Time_Mess_Packs FROM packsmanagement WHERE ID_Supergruppo=%s""", (ID_Supergruppo,))
         data1 = mycursor.fetchone()
         date_1 = data1[0]
     else:
