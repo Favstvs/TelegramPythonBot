@@ -1376,11 +1376,15 @@ def UpdatePacks(ID_Supergruppo, context: CallbackContext):
     Username = str(update.message.from_user.username)
     CallBackRequest = str(update.callback_query.data)
     
+    #FROM /changetime, il comando può essere eseguito da tutti, sia admin sia membri, modificando un parametro UNICO e GLOBALE (Time_Mess_Packs)
+    #status = context.bot.get_chat_member(ID_Supergruppo, ID_User).status
+    #if status == "administrator" or status == "member":
+    
     UpdateGroup(ID_Supergruppo, context)
     CheckUser(ID_User, Username)
     
     Time_Mess_Packs = update.message.date
-    Time_Mess_Packs = Time_Mess.replace(tzinfo=None)
+    Time_Mess_Packs = Time_Mess_Packs.replace(tzinfo=None)
     #[PROBLEMA: Impostare timer per intero gruppo, così è riferito a singolo utente]
     mycursor.execute("""SELECT Time_Mess_Packs FROM packsmanagement WHERE ID_Supergruppo=%s""", (ID_Supergruppo,))
     data = mycursor.fetchone()
@@ -1392,7 +1396,7 @@ def UpdatePacks(ID_Supergruppo, context: CallbackContext):
         date_1 = data1[0]
     else:
         date_1 = data[0]
-        date_2 = Time_Mess
+        date_2 = Time_Mess_Packs
         date_format_str = "%Y-%m-%d %H:%M:%S"
         date_1_start = datetime.strptime(str(date_1), date_format_str)
         date_2_end = datetime.strptime(str(date_2), date_format_str)
