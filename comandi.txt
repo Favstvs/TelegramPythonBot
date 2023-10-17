@@ -1,0 +1,15 @@
+help - aiuto
+protecc - proteggi
+changetime - cambia spawn
+daily - riscatta regalo
+packs - pacchetto
+Wgruppo - top harem waifu
+Hgruppo - top harem husbando
+Wfavorite - waifu favorita
+Hfavorite - husbando favorito
+Wharem - harem waifu
+Hharem - harem husbandi
+Wtrade - scambio waifu
+Htrade - scambio husbando
+Wgift - reaglo waifu
+Hgift - regalo husbando
