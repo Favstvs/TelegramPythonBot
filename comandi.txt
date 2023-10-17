@@ -3,13 +3,13 @@ protecc - proteggi
 changetime - cambia spawn
 daily - riscatta regalo
 packs - pacchetto
-Wgruppo - top harem waifu
-Hgruppo - top harem husbando
-Wfavorite - waifu favorita
-Hfavorite - husbando favorito
-Wharem - harem waifu
-Hharem - harem husbandi
-Wtrade - scambio waifu
-Htrade - scambio husbando
-Wgift - reaglo waifu
-Hgift - regalo husbando
+wgruppo - top harem waifu
+hgruppo - top harem husbando
+wfavorite - waifu favorita
+hfavorite - husbando favorito
+wharem - harem waifu
+hharem - harem husbandi
+wtrade - scambio waifu
+htrade - scambio husbando
+wgift - reaglo waifu
+hgift - regalo husbando
