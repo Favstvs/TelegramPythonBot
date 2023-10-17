@@ -1202,6 +1202,49 @@ def favoritewaifu(update: Update, context: CallbackContext):
         update.message.reply_text("rip, non è giusto...\n<b>/favoritewaifu</b> <i>{numero id waifu "
                                   "come preferita}</i>", parse_mode='HTML')
 
+
+# Scegli husbandi preferito da tenere in copertina harem
+def favoritehusbando(update: Update, context: CallbackContext):
+    # Prendo i dati di riferimento
+    ID_Supergruppo = str(update.message.chat.id)
+    ID_User = str(update.message.from_user.id)
+
+    # Aggiorna i dati gruppo
+    UpdateGroup(ID_Supergruppo, context)
+
+    # Rimuovo il comando
+    Favorite_Husbando = update.message.text
+    try:
+        # Rimozione comando dal messaggio
+        Favorite_Husbando = int(Favorite_Husbando.partition(' ')[2])
+
+        # Cerco la waifu tramite il place dato
+        mycursor.execute("""SELECT husbandi.ID_Husbando, husbandi.Nome_Husbando
+                            FROM relation, husbandi 
+                            WHERE relation.ID_Supergruppo = %s
+                            AND relation.ID_User = %s
+                            AND relation.ID_Husbandp = husbandi.ID_Husbando
+                            AND relation.Place = %s""",
+                         (ID_Supergruppo, ID_User, Favorite_Husbando))
+        data = mycursor.fetchone()
+        if data:
+            ID_Favorite_Husbando = data[0]
+            Name_Favorite_Husbando = data[1]
+
+            # Inserisco la nuova waifu preferita nella table
+            mycursor.execute("""UPDATE harem 
+                                        SET Husbando_Preferito = %s
+                                        WHERE ID_Supergruppo = %s
+                                        AND ID_User = %s""",
+                             (ID_Favorite_Husbando, ID_Supergruppo, ID_User))
+
+            update.message.reply_text("Ho messo " + Name_Favorite_Husbando + " come husbando preferito")
+        else:
+            update.message.reply_text("rip, non c'è un husbando con questo id nel tuo harem...")
+    except:
+        update.message.reply_text("rip, non è giusto...\n<b>/favoritehsubando</b> <i>{numero id husabando "
+                                  "come preferito}</i>", parse_mode='HTML')
+
     
 
 # ZONA CHECK
@@ -1386,12 +1429,12 @@ def UpdatePacks(ID_Supergruppo, context: CallbackContext):
     Time_Mess_Packs = update.message.date
     Time_Mess_Packs = Time_Mess_Packs.replace(tzinfo=None)
     #[PROBLEMA: Impostare timer per intero gruppo, così è riferito a singolo utente]
-    mycursor.execute("""SELECT Time_Mess_Packs FROM packsmanagement WHERE ID_Supergruppo=%s""", (ID_Supergruppo,))
+    mycursor.execute("""SELECT Time_Mess_Packs FROM management WHERE ID_Supergruppo=%s""", (ID_Supergruppo,))
     data = mycursor.fetchone()
     
     if data[0] == None:
-        mycursor.execute("""UPDATE packsmanagement SET Time_Mess_Packs=now() WHERE ID_Supergruppo=%s""",(ID_Supergruppo,))
-        mycursor.execute("""SELECT Time_Mess_Packs FROM packsmanagement WHERE ID_Supergruppo=%s""", (ID_Supergruppo,))
+        mycursor.execute("""UPDATE management SET Time_Mess_Packs=now() WHERE ID_Supergruppo=%s""",(ID_Supergruppo,))
+        mycursor.execute("""SELECT Time_Mess_Packs FROM management WHERE ID_Supergruppo=%s""", (ID_Supergruppo,))
         data1 = mycursor.fetchone()
         date_1 = data1[0]
     else:
@@ -1431,7 +1474,7 @@ def UpdatePacks(ID_Supergruppo, context: CallbackContext):
                  ID_Waifu = data[0]
                  PATH_IMG = data[1]
 
-                 mycursor.execute("""UPDATE Wmanagement
+                 mycursor.execute("""UPDATE management
                                     SET Time_Mess = 25,
                                     Started = 1,
                                     ID_Waifu = %s,
@@ -1455,7 +1498,7 @@ def UpdatePacks(ID_Supergruppo, context: CallbackContext):
                  ID_Husbando = data[0]
                  PATH_IMG = data[1]
 
-                 mycursor.execute("""UPDATE Hmanagement
+                 mycursor.execute("""UPDATE management
                                     SET Time_Mess = 25,
                                     Started = 1,
                                     ID_Husbando = %s
