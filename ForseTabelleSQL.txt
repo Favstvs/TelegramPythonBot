@@ -1,0 +1,14 @@
+PROBABILI TABELLE:
+users.sql
+supergruppo.sql
+waifu.sql
+husbandi.sql
+management.sql OR [wmanagement.sql AND hmanagement.sql]
+relation.sql OR [wrelation.sql AND hrelation.sql]
+wtrade.sql
+htrade.sql
+wgift.sql
+hgift.sql
+wharem.sql
+hharem.sql
+
