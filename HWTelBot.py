@@ -652,6 +652,45 @@ def topfatewaifugram(update: Update, context: CallbackContext):
     else:
         update.message.reply_text("Spiace, non ci sono harem in sto gruppo...")
 
+# Classifica dei 10 utenti con piu' husbandi
+def topfatehusbandogram(update: Update, context: CallbackContext):
+    # Prendo i dati di riferimento
+    ID_Supergruppo = str(update.message.chat.id)
+
+    # Aggiorna i dati gruppo
+    UpdateGroup(ID_Supergruppo, context)
+
+    # Cerco tutti gli utenti registrati in questo gruppo con un harem
+    mycursor.execute(
+        """SELECT users.Username, sum relation.NP) as MAX_NP
+            FROM relation, users, husbandi, supergruppo
+            WHERE relation.ID_Supergruppo=%s  
+            AND relation.ID_Supergruppo = supergruppo.ID_Supergruppo 
+            AND relation.ID_User = users.ID_User 
+            AND relation.ID_Husbando = husbandi.ID_Husbando
+            GROUP BY relation.ID_User
+            ORDER BY MAX_NP DESC
+            LIMIT 10""", (ID_Supergruppo,))
+    data = mycursor.fetchall()
+
+    # Formulo la lista
+    # Ordinati per np
+    if data:
+        i = 0
+        Harem = ""
+        for row in data:
+            i += 1
+            Harem = str(Harem + str(i) + ". " + str(row[0]) + " -- " + str(row[1]) + "\n")
+
+        # Formulo il resto del messaggio
+        Supergruppo_nome = str(update.message.chat.title)
+        Harem = "Top harems in " + Supergruppo_nome + "\n\n" + Harem
+
+        # Invio il messaggio
+        update.message.reply_text(Harem)
+    else:
+        update.message.reply_text("Spiace, non ci sono harem in sto gruppo...")
+
 
 # Cambia tempo spawn
 def changetime(update: Update, context: CallbackContext):
@@ -1649,7 +1688,7 @@ def main():
     dp.add_handler(CommandHandler("wgruppo", topfatewaifugram, Filters.chat_type.supergroup & Filters.update.message))
     #dp.add_handler(CommandHandler("hgruppo", topfatehusbandogram, Filters.chat_type.supergroup & Filters.update.message))
     dp.add_handler(CommandHandler("wfavorite", favoritewaifu, Filters.chat_type.supergroup & Filters.update.message))
-    #dp.add_handler(CommandHandler("Hfavorite", favoritehusbando, Filters.chat_type.supergroup & Filters.update.message))
+    #dp.add_handler(CommandHandler("Hfavorite", favoritehusbando, Filters.chat_type.supergroup & Filters.update.message))[DONE]
     dp.add_handler(CommandHandler("wtrade", tradewaifu, Filters.chat_type.supergroup & Filters.update.message))
     #dp.add_handler(CommandHandler("htrade", tradehusbando, Filters.chat_type.supergroup & Filters.update.message))
     dp.add_handler(CommandHandler("wgift", giftwaifu, Filters.chat_type.supergroup & Filters.update.message))
