@@ -414,7 +414,7 @@ def protecchusbando(update: Update, context: CallbackContext):
 
 
 # Lista waifu
-def harem(update: Update, context: CallbackContext):
+def Wharem(update: Update, context: CallbackContext):
     # Prendo i dati di riferimento
     ID_Supergruppo = str(update.message.chat.id)
     Supergruppo_nome = str(update.message.chat.title)
@@ -450,7 +450,7 @@ def harem(update: Update, context: CallbackContext):
 
         # Rimuovo precedente messaggio harem se esiste
         mycursor.execute("""SELECT Mess_ID_List
-                            FROM harem
+                            FROM Wharem
                             WHERE ID_User = %s AND
                             ID_Supergruppo = %s""",
                          (ID_User, ID_Supergruppo,))
@@ -483,13 +483,13 @@ def harem(update: Update, context: CallbackContext):
 
         # Prendo la waifu preferita
         mycursor.execute("""SELECT PATH_IMG
-                            FROM waifu, relation, harem
+                            FROM waifu, relation, Wharem
                             WHERE relation.ID_User= %s AND
                          relation.ID_Supergruppo = %s AND
                          relation.ID_Waifu = waifu.ID_Waifu AND
-                            harem.Waifu_Preferita = waifu.ID_Waifu AND
-                            harem.ID_Supergruppo = relation.ID_Supergruppo AND
-                            harem.ID_User = relation.ID_User
+                            Wharem.Waifu_Preferita = waifu.ID_Waifu AND
+                            Wharem.ID_Supergruppo = relation.ID_Supergruppo AND
+                            Wharem.ID_User = relation.ID_User
                             """,
                          (ID_User, ID_Supergruppo,))
         data = mycursor.fetchone()
@@ -635,13 +635,13 @@ def topfatewaifugram(update: Update, context: CallbackContext):
 
     # Cerco tutti gli utenti registrati in uqesto gruppo con un harem
     mycursor.execute(
-        """SELECT users.Username, sum relation.NP) as MAX_NP
-            FROM relation, users, waifu, supergruppo
-            WHERE relation.ID_Supergruppo=%s  
-            AND relation.ID_Supergruppo = supergruppo.ID_Supergruppo 
-            AND relation.ID_User = users.ID_User 
-            AND relation.ID_Waifu = waifu.ID_Waifu
-            GROUP BY relation.ID_User
+        """SELECT users.Username, sum Wrelation.NP) as MAX_NP
+            FROM Wrelation, users, waifu, supergruppo
+            WHERE Wrelation.ID_Supergruppo=%s  
+            AND Wrelation.ID_Supergruppo = supergruppo.ID_Supergruppo 
+            AND Wrelation.ID_User = users.ID_User 
+            AND Wrelation.ID_Waifu = waifu.ID_Waifu
+            GROUP BY Wrelation.ID_User
             ORDER BY MAX_NP DESC
             LIMIT 10""", (ID_Supergruppo,))
     data = mycursor.fetchall()
@@ -760,21 +760,21 @@ def tradewaifu(update: Update, context: CallbackContext):
                         # Verifico l'identità delle  2 waifu
                         # Se non esistono invio l'avviso
                         mycursor.execute("""SELECT Nome_Waifu
-                                                                        FROM relation, waifu 
-                                                                        WHERE relation.ID_Supergruppo = %s
-                                                                        AND relation.ID_User = %s
-                                                                        AND relation.ID_Waifu = waifu.ID_Waifu
-                                                                        AND relation.Place = %s""",
+                                                                        FROM Wrelation, waifu 
+                                                                        WHERE Wrelation.ID_Supergruppo = %s
+                                                                        AND Wrelation.ID_User = %s
+                                                                        AND Wrelation.ID_Waifu = waifu.ID_Waifu
+                                                                        AND Wrelation.Place = %s""",
                                          (ID_Supergruppo, ID_User_1, Scambio_1,))
                         data = mycursor.fetchone()
                         if data:
                             Name_Waifu_1 = data[0]
                             mycursor.execute("""SELECT Nome_Waifu
-                                                                            FROM relation, waifu 
-                                                                            WHERE relation.ID_Supergruppo = %s
-                                                                            AND relation.ID_User = %s
-                                                                            AND relation.ID_Waifu = waifu.ID_Waifu
-                                                                            AND relation.Place = %s""",
+                                                                            FROM Wrelation, waifu 
+                                                                            WHERE Wrelation.ID_Supergruppo = %s
+                                                                            AND Wrelation.ID_User = %s
+                                                                            AND Wrelation.ID_Waifu = waifu.ID_Waifu
+                                                                            AND Wrelation.Place = %s""",
                                              (ID_Supergruppo, ID_User_2, Scambio_2,))
                             data = mycursor.fetchone()
                             if data:
@@ -876,7 +876,7 @@ def checktradewaifu(update: Update, context: CallbackContext):
             for Place in Trade:
                 # Controllo se entrambe le waifu sono disponibili
                 mycursor.execute("""SELECT NP, ID_Waifu
-                                    FROM relation
+                                    FROM Wrelation
                                     WHERE ID_Supergruppo = %s AND ID_User = %s 
                                     AND Place = %s""", (ID_Supergruppo, ID_User_Trade[i], Place))
 
@@ -894,19 +894,19 @@ def checktradewaifu(update: Update, context: CallbackContext):
             for Place in Trade:
                 if NP[i] == 1:
                     # Rimuovo la waifu dalla tabella
-                    mycursor.execute("""DELETE FROM relation 
+                    mycursor.execute("""DELETE FROM Wrelation 
                                         WHERE ID_Supergruppo = %s 
                                         AND ID_User = %s
                                         AND Place = %s""", (ID_Supergruppo, ID_User_Trade[i], Place,))
                     # Abbasso il place dei successivi
-                    mycursor.execute("""UPDATE relation
+                    mycursor.execute("""UPDATE Wrelation
                                         SET Place = Place - 1
                                         WHERE ID_Supergruppo = %s AND
                                         ID_User = %s AND
                                         Place > %s""", (ID_Supergruppo, ID_User_Trade[i], Place,))
                 else:
                     # Abbasso l'NP
-                    mycursor.execute("""UPDATE relation
+                    mycursor.execute("""UPDATE Wrelation
                                         SET NP = NP - 1
                                         WHERE ID_User= %s AND
                                         ID_Supergruppo = %s AND
@@ -921,7 +921,7 @@ def checktradewaifu(update: Update, context: CallbackContext):
                 # Aggiungo la waifu all'harem dell'utente
                 # Verifico se l'utente ha già protetto questa waifu
                 mycursor.execute("""SELECT *
-                                    FROM relation
+                                    FROM Wrelation
                                     WHERE ID_User= %s AND
                                     ID_Supergruppo = %s AND
                                     ID_Waifu = %s
@@ -930,7 +930,7 @@ def checktradewaifu(update: Update, context: CallbackContext):
                 # if - Se esiste aggiungo un NP
                 # else - Se non esiste creo la relazione
                 if data:
-                    mycursor.execute("""UPDATE relation
+                    mycursor.execute("""UPDATE Wrelation
                                                         SET NP = NP + 1
                                                         WHERE ID_User= %s AND
                                                         ID_Supergruppo = %s AND
@@ -939,7 +939,7 @@ def checktradewaifu(update: Update, context: CallbackContext):
                 else:
                     # Cerco il numero di relazione strette finora dall'utente
                     mycursor.execute("""SELECT count(*)
-                                                        FROM relation
+                                                        FROM Wrelation
                                                         WHERE ID_User = %s AND
                                                         ID_Supergruppo = %s""",
                                      (ID_User_Trade[i], ID_Supergruppo,))
@@ -947,7 +947,7 @@ def checktradewaifu(update: Update, context: CallbackContext):
                     NUMERO_RELAZIONI = data[0]
 
                     # Setto i dati della nuova relazione
-                    mycursor.execute("INSERT INTO relation(ID_User, ID_Supergruppo, ID_Waifu, NP, Place) "
+                    mycursor.execute("INSERT INTO Wrelation(ID_User, ID_Supergruppo, ID_Waifu, NP, Place) "
                                      "VALUES(%s, %s, %s, 1, %s)",
                                      (ID_User_Trade[i], ID_Supergruppo, ID_Waifu, NUMERO_RELAZIONI + 1,))
                 i -= 1
@@ -1061,22 +1061,22 @@ def giftwaifu(update: Update, context: CallbackContext):
                         # Verifico l'identità della waifu
                         # Se non esistono invio l'avviso
                         mycursor.execute("""SELECT Nome_Waifu
-                                                                        FROM relation, waifu 
-                                                                        WHERE relation.ID_Supergruppo = %s
-                                                                        AND relation.ID_User = %s
-                                                                        AND relation.ID_Waifu = waifu.ID_Waifu
-                                                                        AND relation.Place = %s""",
+                                                                        FROM Wrelation, waifu 
+                                                                        WHERE Wrelation.ID_Supergruppo = %s
+                                                                        AND Wrelation.ID_User = %s
+                                                                        AND Wrelation.ID_Waifu = waifu.ID_Waifu
+                                                                        AND Wrelation.Place = %s""",
                                          (ID_Supergruppo, ID_User_1, Regalo))
                         data = mycursor.fetchone()
                         if data:
                             Name_Waifu_1 = data[0]
                             '''
                             mycursor.execute("""SELECT Nome_Waifu
-                                                                            FROM relation, waifu 
-                                                                            WHERE relation.ID_Supergruppo = %s
-                                                                            AND relation.ID_User = %s
-                                                                            AND relation.ID_Waifu = waifu.ID_Waifu
-                                                                            AND relation.Place = %s""",
+                                                                            FROM Wrelation, waifu 
+                                                                            WHERE Wrelation.ID_Supergruppo = %s
+                                                                            AND Wrelation.ID_User = %s
+                                                                            AND Wrelation.ID_Waifu = waifu.ID_Waifu
+                                                                            AND Wrelation.Place = %s""",
                                              (ID_Supergruppo, ID_User_2, Scambio_2,))
                             data = mycursor.fetchone()
                             if data:
@@ -1308,11 +1308,11 @@ def favoritewaifu(update: Update, context: CallbackContext):
 
         # Cerco la waifu tramite il place dato
         mycursor.execute("""SELECT waifu.ID_Waifu, waifu.Nome_Waifu
-                            FROM relation, waifu 
-                            WHERE relation.ID_Supergruppo = %s
-                            AND relation.ID_User = %s
-                            AND relation.ID_Waifu = waifu.ID_Waifu
-                            AND relation.Place = %s""",
+                            FROM Wrelation, waifu 
+                            WHERE Wrelation.ID_Supergruppo = %s
+                            AND Wrelation.ID_User = %s
+                            AND Wrelation.ID_Waifu = waifu.ID_Waifu
+                            AND Wrelation.Place = %s""",
                          (ID_Supergruppo, ID_User, Favorite_Waifu))
         data = mycursor.fetchone()
         if data:
@@ -1320,7 +1320,7 @@ def favoritewaifu(update: Update, context: CallbackContext):
             Name_Favorite_Waifu = data[1]
 
             # Inserisco la nuova waifu preferita nella table
-            mycursor.execute("""UPDATE harem 
+            mycursor.execute("""UPDATE Wharem 
                                         SET Waifu_Preferita = %s
                                         WHERE ID_Supergruppo = %s
                                         AND ID_User = %s""",
@@ -1677,7 +1677,7 @@ def main():
     dp.add_handler(CallbackQueryHandler(UpdatePacks, pattern="Esci@Waifu_Bot"))
 
     # Gestione lista waifu
-    dp.add_handler(CommandHandler("wharem", harem, Filters.chat_type.supergroup & Filters.update.message))
+    dp.add_handler(CommandHandler("wharem", Wharem, Filters.chat_type.supergroup & Filters.update.message))
     dp.add_handler(CallbackQueryHandler(PageSelection))
 
     # Gestione lista husbandi
