@@ -15,6 +15,16 @@ v. 20 Python-Telegram_Bot:
 DEPRECATION:
 -TelegramDeprecationWarning: The @run_async decorator is deprecated. Use the `run_async` parameter of your Handler or `Dispatcher.run_async` instead.
 -TelegramDeprecationWarning: Filters.group is deprecated. Use Filters.chat_type.groups instead.
+
+26/10
+FUNZIONI che usavano la vecchia tabella management.sql da reimpostare il db 
+changetime()
+VerifyListIdentity()
+CheckMessages()
+UpdateGroup()
+findWholeWord()?
+NewGroup()
+UpdateGroup()
 """
 import mysql.connector
 import random
@@ -2452,9 +2462,10 @@ def Welcomechat(update: Update, context: CallbackContext):
         NewGroup(ID_Supergruppo, Supergruppo_nome)
         # Invio informazioni sul bot al gruppo
         update.message.reply_text(text="<b>Ciao chat!</b> Grazie per avermi aggiunto! "
-        		 		"Da ora un sacco di waifu bellissime appariranno in questo gruppo "
-                                       "Puoi aggiungerle al tuo harem personale indovinando per primo il loro nome\n "
+        		 		"Da ora un sacco di waifu e di husbandi di tantissimi anime diversi appariranno in questo gruppo "
+                                       "Puoi aggiungerli al tuo harem personale indovinando per primo il loro nome\n "
                                        "Scrivi /help per tutte le infromazioni!\n"
+                                       "con amore da Enrico per YURI ANIME/MANGA ITA  ¯\\(◉‿◉)/¯ "
                                   , parse_mode='HTML')
 
 
