@@ -100,7 +100,7 @@ def help(update: Update, context: CallbackContext):
                                    "/hgruppo - mostra top harem husbandi\n"
                                    "/hfavorite <i>{NP Husbando Preferito}</i>\n"
                                    "/htrade <i>{ID Husbando che hai} {ID Husbando che vuoi}</i>\n"
-                                   "/hgift <i>{ID Husbadnp che vuoi dare}</i>\n"
+                                   "/hgift <i>{ID Husbando che vuoi dare}</i>\n"
                                    "per WAIFU:\n"
                                    "/wharem - mostra harem waifu\n"
                                    "/wgruppo- mostra top harem waifu\n"
@@ -2241,12 +2241,13 @@ def UpdatePacks(update: Update, context: CallbackContext):
     Time_Mess_Packs = update.message.date
     Time_Mess_Packs = Time_Mess_Packs.replace(tzinfo=None)
     #[PROBLEMA: Impostare timer per intero gruppo, così è riferito a singolo utente]
-    mycursor.execute("""SELECT Time_Mess_Packs FROM management WHERE ID_Supergruppo=%s""", (ID_Supergruppo,))
+    mycursor.execute("""SELECT Time_Mess_Packs FROM Wmanagement WHERE ID_Supergruppo=%s""", (ID_Supergruppo,))
     data = mycursor.fetchone()
     
     if data[0] == None:
-        mycursor.execute("""UPDATE management SET Time_Mess_Packs=now() WHERE ID_Supergruppo=%s""",(ID_Supergruppo,))
-        mycursor.execute("""SELECT Time_Mess_Packs FROM management WHERE ID_Supergruppo=%s""", (ID_Supergruppo,))
+        mycursor.execute("""UPDATE Wmanagement SET Time_Mess_Packs=now() WHERE ID_Supergruppo=%s""",(ID_Supergruppo,))
+        #mycurso.execute("""UPDATE Hmanagement SET Time_Mess_Packs=now() WHERE ID_Supergruppo=%s""",(ID_Supergruppo,))
+        mycursor.execute("""SELECT Time_Mess_Packs FROM Wmanagement WHERE ID_Supergruppo=%s""", (ID_Supergruppo,))
         data1 = mycursor.fetchone()
         date_1 = data1[0]
     else:
@@ -2273,8 +2274,8 @@ def UpdatePacks(update: Update, context: CallbackContext):
                  mycursor.execute("""SELECT ID_Waifu
                                     FROM waifu
                                     ORDER BY ID_Waifu desc""")
-                 data = mycursor.fetchone()
-                 MAX_WAIFU_ID = int(data[0])
+                 wdata = mycursor.fetchone()
+                 MAX_WAIFU_ID = int(wdata[0])
 
                  ID_WAIFU = random.randrange(1, MAX_WAIFU_ID + 1)
 
@@ -2282,9 +2283,9 @@ def UpdatePacks(update: Update, context: CallbackContext):
                                     FROM waifu
                                     WHERE ID_Waifu = %s
                                  """, (ID_WAIFU,))
-                 data = mycursor.fetchone()
-                 ID_Waifu = data[0]
-                 PATH_IMG = data[1]
+                 wdata = mycursor.fetchone()
+                 ID_Waifu = wdata[0]
+                 PATH_IMG = wdata[1]
 
                  mycursor.execute("""UPDATE Wmanagement
                                     SET Time_Mess = 25,
@@ -2298,17 +2299,17 @@ def UpdatePacks(update: Update, context: CallbackContext):
                  mycursor.execute("""SELECT ID_Husbando
                                     FROM husbandi
                                     ORDER BY ID_Husbando desc""")
-                 data = mycursor.fetchone()
-                 MAX_HUSBANDO_ID = int(data[0])
+                 hdata = mycursor.fetchone()
+                 MAX_HUSBANDO_ID = int(hdata[0])
                 
                  ID_HUSBANDO = random.randrange(1, MAX_HUSBANDO_ID + 1)
 
                  mycursor.execute("""SELECT ID_Husbando, PATH_IMG
                                     FROM husbandi
                                     WHERE ID_Husbando = %s""", (ID_HUSBANDO,))
-                 data = mycursor.fetchone()
-                 ID_Husbando = data[0]
-                 PATH_IMG = data[1]
+                 hdata = mycursor.fetchone()
+                 ID_Husbando = hdata[0]
+                 PATH_IMG = hdata[1]
 
                  mycursor.execute("""UPDATE Hmanagement
                                     SET Time_Mess = 25,
