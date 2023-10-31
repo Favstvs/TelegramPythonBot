@@ -24,7 +24,6 @@ CheckMessages()
 UpdateGroup()
 findWholeWord()?
 NewGroup()
-UpdateGroup()
 """
 import mysql.connector
 import random
