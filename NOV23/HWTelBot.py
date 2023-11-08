@@ -2234,6 +2234,14 @@ def UpdatePacks(update: Update, context: CallbackContext):
     
     UpdateGroup(ID_Supergruppo, context)
     CheckUser(ID_User, Username)
+   '''
+   PER DOPO A CASA:
+    keyboard = [[InlineKeyboardButton('WAIFU', callback_data='Waifu@Tel_Bot'),
+                         InlineKeyboardButton('HUSBANDO', callback_data='Husbando@Tel_Bot')],
+                         [InlineKeyboardButton('Quit', callback_data='Esci@Tel_Bot')]]
+            reply_markup = InlineKeyboardMarkup(keyboard)
+   context.bot.send_photo(chat_id=ID_Supergruppo, photo=open('/home/enrico/Immagini/w&h.jpeg', 'rb'), caption="Hey Hey <b>Appare finalmente un pack</b> 📦\n Scegli se vuoi <i>waifu</i> oppure <i>husbando<i>\n", reply_markup=reply_markup, parse_mode='HTML')
+   '''
     
     Time_Mess_Packs = update.message.date
     Time_Mess_Packs = Time_Mess_Packs.replace(tzinfo=None)
