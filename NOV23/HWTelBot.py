@@ -2226,7 +2226,7 @@ def UpdatePacks(update: Update, context: CallbackContext):
     ID_Supergruppo = str(update.message.chat.id)
     ID_User = str(update.message.from_user.id)
     Username = str(update.message.from_user.username)
-    CallBackRequest = str(update.callback_query.data)
+    #CallBackRequest = str(update.callback_query.data)
     
     #FROM /changetime, il comando può essere eseguito da tutti, sia admin sia membri, modificando un parametro UNICO e GLOBALE (Time_Mess_Packs)
     #status = context.bot.get_chat_member(ID_Supergruppo, ID_User).status
