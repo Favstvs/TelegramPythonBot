@@ -2246,12 +2246,12 @@ def UpdatePacks(update: Update, context: CallbackContext):
     Time_Mess_Packs = update.message.date
     Time_Mess_Packs = Time_Mess_Packs.replace(tzinfo=None)
     #[PROBLEMA: Impostare timer per intero gruppo, così è riferito a singolo utente]
-    mycursor.execute("""SELECT Time_Mess_Packs FROM Wmanagement WHERE ID_Supergruppo=%s""", (ID_Supergruppo,))
+    mycursor.execute("""SELECT Time_Mess_Packs FROM Wmanagement WHERE ID_Supergruppo = %s""", (ID_Supergruppo,))
     data = mycursor.fetchone()
     
     if data[0] == None:
-        mycursor.execute("""UPDATE Wmanagement SET Time_Mess_Packs=now() WHERE ID_Supergruppo=%s""",(ID_Supergruppo,))
-        mycursor.execute("""SELECT Time_Mess_Packs FROM Wmanagement WHERE ID_Supergruppo=%s""", (ID_Supergruppo,))
+        mycursor.execute("""UPDATE Wmanagement SET Time_Mess_Packs=now() WHERE ID_Supergruppo = %s""",(ID_Supergruppo,))
+        mycursor.execute("""SELECT Time_Mess_Packs FROM Wmanagement WHERE ID_Supergruppo = %s""", (ID_Supergruppo,))
         data1 = mycursor.fetchone()
         date_1 = data1[0]
     else:
@@ -2297,7 +2297,7 @@ def UpdatePacks(update: Update, context: CallbackContext):
                  mycursor.execute("""UPDATE Wmanagement
                                     SET Time_Mess = 25,
                                     Started = 1,
-                                    ID_Waifu = %s,
+                                    ID_Waifu = %s 
                                     WHERE ID_Supergruppo = %s""",
                                     (ID_Waifu, ID_Supergruppo,))
                  context.bot.send_photo(chat_id=ID_Supergruppo, photo=open(PATH_IMG, 'rb'), caption="OwO <b>Appare una waifu!</b>\nAggiungila al tuo harem con /protecc <i>nome waifu</i>\n", parse_mode='HTML')
