@@ -1,4 +1,12 @@
 """
+29 NOV:
+/packs 3 PROBLEMI:
+- rimanda in chat il banner dei packs
+- si può catturare solo l'ultimo personaggio che ti manda
+- il comando /protecc funiona solo o con waifu o con husbandi
+
+
+
 PROBLEMI CON MYSQL:
 -inserire SET FOREIGN_KEY_CHECKS = 0;
 
