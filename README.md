@@ -1,4 +1,4 @@
-# Waifu & Husbandi CatchBot
+# CatchBot
 
 
 <br>For Hosting:</br>
